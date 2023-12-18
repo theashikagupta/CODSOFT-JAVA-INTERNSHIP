@@ -1,0 +1,105 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Student {
+    private String name;
+    private int rollNumber;
+    private String grade;
+
+    // Constructor
+    public Student(String name, int rollNumber, String grade) {
+        this.name = name;
+        this.rollNumber = rollNumber;
+        this.grade = grade;
+    }
+
+    // Getters
+    public String getName() {
+        return name;
+    }
+
+    public int getRollNumber() {
+        return rollNumber;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+}
+
+class StudentManagementSystem {
+    private ArrayList<Student> students;
+
+    public StudentManagementSystem() {
+        students = new ArrayList<>();
+    }
+
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    public void removeStudent(Student student) {
+        students.remove(student);
+    }
+
+    public Student searchStudent(int rollNumber) {
+        for (Student student : students) {
+            if (student.getRollNumber() == rollNumber) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    public void displayAllStudents() {
+        System.out.println("All Students:");
+        for (Student student : students) {
+            System.out.println("Name: " + student.getName());
+            System.out.println("Roll Number: " + student.getRollNumber());
+            System.out.println("Grade: " + student.getGrade());
+            System.out.println();
+        }
+    }
+}
+
+class StudentManagementSystemApp {
+    public static void main(String[] args) {
+        StudentManagementSystem studentManagementSystem = new StudentManagementSystem();
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("Student Management System Menu:");
+            System.out.println("1. Add Student");
+            System.out.println("2. Remove Student");
+            System.out.println("3. Search Student");
+            System.out.println("4. Display All Students");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    // Implement adding a student logic
+                    break;
+                case 2:
+                    // Implement removing a student logic
+                    break;
+                case 3:
+                    // Implement searching for a student logic
+                    break;
+                case 4:
+                    // Implement displaying all students logic
+                    break;
+                case 5:
+                    System.out.println("Exiting Student Management System. Goodbye!");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
+            }
+        } while (choice != 5);
+        scanner.close();
+    }
+}
