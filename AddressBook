@@ -1,0 +1,126 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Contact {
+    private String name;
+    private String phoneNumber;
+    private String emailAddress;
+
+    // Constructor
+    public Contact(String name, String phoneNumber, String emailAddress) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+    }
+
+    // Getters
+    public String getName() {
+        return name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+}
+
+class AddressBook {
+    private ArrayList<Contact> contacts;
+
+    public AddressBook() {
+        contacts = new ArrayList<>();
+    }
+
+    public void addContact(Contact contact) {
+        contacts.add(contact);
+    }
+
+    public void removeContact(Contact contact) {
+        contacts.remove(contact);
+    }
+
+    public Contact searchContact(String name) {
+        for (Contact contact : contacts) {
+            if (contact.getName().equalsIgnoreCase(name)) {
+                return contact;
+            }
+        }
+        return null;
+    }
+
+    public void displayAllContacts() {
+        System.out.println("All Contacts:");
+        for (Contact contact : contacts) {
+            System.out.println("Name: " + contact.getName());
+            System.out.println("Phone Number: " + contact.getPhoneNumber());
+            System.out.println("Email Address: " + contact.getEmailAddress());
+            System.out.println();
+        }
+    }
+}
+
+class AddressBookSystem {
+    public static void main(String[] args) {
+        AddressBook addressBook = new AddressBook();
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("Address Book System Menu:");
+            System.out.println("1. Add Contact");
+            System.out.println("2. Remove Contact");
+            System.out.println("3. Search Contact");
+            System.out.println("4. Display All Contacts");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter Name: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Enter Phone Number: ");
+                    String phoneNumber = scanner.nextLine();
+                    System.out.print("Enter Email Address: ");
+                    String emailAddress = scanner.nextLine();
+
+                    // Add validation for required fields here
+
+                    Contact newContact = new Contact(name, phoneNumber, emailAddress);
+                    addressBook.addContact(newContact);
+                    System.out.println("Contact added successfully!");
+                    break;
+                case 2:
+                    // Implement contact removal logic
+                    break;
+                case 3:
+                    System.out.print("Enter Name to search: ");
+                    String searchName = scanner.nextLine();
+                    Contact foundContact = addressBook.searchContact(searchName);
+                    if (foundContact != null) {
+                        System.out.println("Contact found:");
+                        System.out.println("Name: " + foundContact.getName());
+                        System.out.println("Phone Number: " + foundContact.getPhoneNumber());
+                        System.out.println("Email Address: " + foundContact.getEmailAddress());
+                    } else {
+                        System.out.println("Contact not found!");
+                    }
+                    break;
+                case 4:
+                    addressBook.displayAllContacts();
+                    break;
+                case 5:
+                    System.out.println("Exiting Address Book System. Goodbye!");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
+            }
+        } while (choice != 5);
+        scanner.close();
+    }
+}
